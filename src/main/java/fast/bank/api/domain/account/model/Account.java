@@ -1,5 +1,6 @@
 package fast.bank.api.domain.account.model;
 
+import fast.bank.api.domain.user.model.User;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -16,8 +17,13 @@ public class Account {
     @Id
     private Long number;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "registry")
+    private User user;
+
     private Integer agency;
 
+    @Enumerated(EnumType.STRING)
     private AccountType accountType;
 
     private Float balance;
