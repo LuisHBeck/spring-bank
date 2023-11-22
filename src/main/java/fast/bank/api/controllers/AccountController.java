@@ -2,8 +2,10 @@ package fast.bank.api.controllers;
 
 import fast.bank.api.domain.account.dto.AccountRegistrationData;
 import fast.bank.api.domain.account.repository.AccountRepository;
+import fast.bank.api.domain.account.service.AccountRegistrationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +18,12 @@ public class AccountController {
     @Autowired
     private AccountRepository repository;
 
+    @Autowired
+    private AccountRegistrationService registrationService;
+
     @PostMapping
-    public void register(@RequestBody @Valid AccountRegistrationData data) {
-        System.out.println(data);
+    public ResponseEntity register(@RequestBody @Valid AccountRegistrationData data) {
+        var account = registrationService.createAccount(data);
+        return ResponseEntity.ok(account);
     }
 }
