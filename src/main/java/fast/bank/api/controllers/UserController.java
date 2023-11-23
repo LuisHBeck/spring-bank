@@ -4,6 +4,7 @@ import fast.bank.api.domain.user.dto.UserListData;
 import fast.bank.api.domain.user.dto.UserRegistrationData;
 import fast.bank.api.domain.user.model.User;
 import fast.bank.api.domain.user.repository.UserRepository;
+import fast.bank.api.domain.user.service.UserDeletionService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class UserController {
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    UserDeletionService deletionService;
 
     @PostMapping
     @Transactional
@@ -41,5 +44,11 @@ public class UserController {
     public ResponseEntity listById(@PathVariable Long registry) {
         var user = repository.getReferenceById(registry);
         return ResponseEntity.ok(new UserListData(user));
+    }
+
+    @DeleteMapping("/{registry}")
+    public ResponseEntity delete(@PathVariable Long registry) {
+        deletionService.logicalUserDeletion(registry);
+        return ResponseEntity.noContent().build();
     }
 }

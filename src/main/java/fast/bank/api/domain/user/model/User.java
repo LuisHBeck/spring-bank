@@ -29,4 +29,8 @@ public class User {
         this.password = data.password();
         this.isActive = true;
     }
+
+    public void logicalDeletion() {
+        this.isActive = false;
+    }
 }
