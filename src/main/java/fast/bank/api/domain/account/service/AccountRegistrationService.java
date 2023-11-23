@@ -1,5 +1,6 @@
 package fast.bank.api.domain.account.service;
 
+import fast.bank.api.domain.account.dto.AccountDetailingData;
 import fast.bank.api.domain.account.dto.AccountRegistrationData;
 import fast.bank.api.domain.account.model.Account;
 import fast.bank.api.domain.account.repository.AccountRepository;
@@ -22,13 +23,15 @@ public class AccountRegistrationService {
     @Autowired
     private List<AccountRegistrationValidators> validators;
 
-    public Account createAccount(AccountRegistrationData data) {
+    public AccountDetailingData createAccount(AccountRegistrationData data) {
         validators.forEach(v -> v.validate(data));
 
         var user = userRepository.getReferenceById(data.userRegistry());
         var accType = data.accountType();
 
-        var account = new Account(null, user, 1111, accType, 1500F, 2600F, true);
-        return account;
+        var account = new Account(user, 1111, accType, 1500.0, 2600.0);
+        accountRepository.save(account);
+
+        return new AccountDetailingData(user.getRegistry(), account.getNumber(), account.getAgency(), account.getBalance(), account.getCreditLimit());
     }
 }

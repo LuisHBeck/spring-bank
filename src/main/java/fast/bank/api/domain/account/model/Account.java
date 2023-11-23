@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Table(name = "Account")
@@ -12,9 +13,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
+@Getter
 public class Account {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long number;
 
     @ManyToOne
@@ -26,9 +29,18 @@ public class Account {
     @Enumerated(EnumType.STRING)
     private AccountType accountType;
 
-    private Float balance;
+    private Double balance;
 
-    private Float creditLimit;
+    private Double creditLimit;
 
     private Boolean isActive;
+
+    public Account(User user, int agency, AccountType accType, double balance, double creditLimit) {
+        this.user = user;
+        this.agency = agency;
+        this.accountType = accType;
+        this.balance = balance;
+        this.creditLimit = creditLimit;
+        this.isActive = true;
+    }
 }
