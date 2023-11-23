@@ -9,11 +9,5 @@ import org.springframework.data.jpa.repository.Query;
 public interface UserRepository extends JpaRepository<User, Long> {
     Page<User> findAllByIsActiveTrue(Pageable pagination);
 
-    @Query("""
-            select u.isActive
-            from User u
-            where
-            u.registry = :registry           
-            """)
-    Boolean findIsActiveById(Long registry);
+    boolean existsByRegistryAndIsActiveTrue(Long registry);
 }
