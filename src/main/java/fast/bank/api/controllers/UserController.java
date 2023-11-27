@@ -47,6 +47,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{registry}")
+    @Transactional
     public ResponseEntity delete(@PathVariable Long registry) {
         deletionService.logicalUserDeletion(registry);
         return ResponseEntity.noContent().build();
