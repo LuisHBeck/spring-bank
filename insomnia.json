@@ -1,1 +1,209 @@
-{"_type":"export","__export_format":4,"__export_date":"2023-11-28T00:49:30.143Z","__export_source":"insomnia.desktop.app:v8.4.5","resources":[{"_id":"req_542761abbb8c45cfbb2cbfab5a04d245","parentId":"fld_a5bd2514d058437dae5d60b7110b81ce","modified":1701132417022,"created":1701130777056,"url":"{{ _.BASE_URL }}/users","name":"CREATE USER","description":"","method":"POST","body":{"mimeType":"application/json","text":"{\n\t\"registry\": 14429688001,\n\t\"password\": \"test@test\"\n}"},"parameters":[],"headers":[{"name":"Content-Type","value":"application/json"},{"name":"User-Agent","value":"insomnia/8.4.5"}],"authentication":{},"metaSortKey":-1701130777056,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"fld_a5bd2514d058437dae5d60b7110b81ce","parentId":"wrk_61ff6df830224cfcae5cf6fc41c1fee3","modified":1701132460301,"created":1701130773896,"name":"USERS","description":"","environment":{},"environmentPropertyOrder":null,"metaSortKey":-1701132452434,"_type":"request_group"},{"_id":"wrk_61ff6df830224cfcae5cf6fc41c1fee3","parentId":null,"modified":1701130763509,"created":1701130763510,"name":"SPRING BANK","description":"","scope":"collection","_type":"workspace"},{"_id":"req_1a7b9c3c1fe54084af44e1f3593b5158","parentId":"fld_a5bd2514d058437dae5d60b7110b81ce","modified":1701132432602,"created":1701130842051,"url":"{{ _.BASE_URL }}/users/14429688001","name":"New Request","description":"","method":"GET","body":{},"parameters":[],"headers":[{"name":"User-Agent","value":"insomnia/8.4.5"}],"authentication":{},"metaSortKey":-1701130776956,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"req_7511a0000a274158b0e980592febb748","parentId":"fld_d2af4ebdb531469b83ae9f730bd7c18f","modified":1701132532755,"created":1701132504578,"url":"{{ _.BASE_URL }}/accounts","name":"CREATE ACCOUNT","description":"","method":"POST","body":{"mimeType":"application/json","text":"{\n\t\"user\": 14429688001,\n\t\"type\": \"CURRENT\"\n}"},"parameters":[],"headers":[{"name":"Content-Type","value":"application/json"},{"name":"User-Agent","value":"insomnia/8.4.5"}],"authentication":{},"metaSortKey":-1701132463353,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"fld_d2af4ebdb531469b83ae9f730bd7c18f","parentId":"wrk_61ff6df830224cfcae5cf6fc41c1fee3","modified":1701132466247,"created":1701132452334,"name":"ACCOUNTS","description":"","environment":{},"environmentPropertyOrder":null,"metaSortKey":-1701132452334,"_type":"request_group"},{"_id":"req_0eb796faa4524d13846282809d542f77","parentId":"fld_d2af4ebdb531469b83ae9f730bd7c18f","modified":1701132483995,"created":1701132463253,"url":"{{ _.BASE_URL }}/accounts","name":"GET ACCOUNTS","description":"","method":"GET","body":{},"parameters":[],"headers":[{"name":"User-Agent","value":"insomnia/8.4.5"}],"authentication":{},"metaSortKey":-1701132463253,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"env_d00c154490684f01e0a993ec44590f92e54933ab","parentId":"wrk_61ff6df830224cfcae5cf6fc41c1fee3","modified":1701130763513,"created":1701130763513,"name":"Base Environment","data":{},"dataPropertyOrder":null,"color":null,"isPrivate":false,"metaSortKey":1701130763513,"_type":"environment"},{"_id":"jar_d00c154490684f01e0a993ec44590f92e54933ab","parentId":"wrk_61ff6df830224cfcae5cf6fc41c1fee3","modified":1701130763515,"created":1701130763515,"name":"Default Jar","cookies":[],"_type":"cookie_jar"},{"_id":"env_76f96ce057494376b865fcb182bc19e6","parentId":"env_d00c154490684f01e0a993ec44590f92e54933ab","modified":1701130824010,"created":1701130794192,"name":".ENV","data":{"BASE_URL":"http://127.0.0.1:8056/api/v1"},"dataPropertyOrder":{"&":["BASE_URL"]},"color":null,"isPrivate":false,"metaSortKey":1701130794192,"_type":"environment"}]}
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2023-11-28T00:49:30.143Z",
+  "__export_source": "insomnia.desktop.app:v8.4.5",
+  "resources": [
+    {
+      "_id": "req_542761abbb8c45cfbb2cbfab5a04d245",
+      "parentId": "fld_a5bd2514d058437dae5d60b7110b81ce",
+      "modified": 1701132417022,
+      "created": 1701130777056,
+      "url": "{{ _.BASE_URL }}/users",
+      "name": "CREATE USER",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"registry\": 14429688001,\n\t\"password\": \"test@test\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/8.4.5"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1701130777056,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_a5bd2514d058437dae5d60b7110b81ce",
+      "parentId": "wrk_61ff6df830224cfcae5cf6fc41c1fee3",
+      "modified": 1701132460301,
+      "created": 1701130773896,
+      "name": "USERS",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1701132452434,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_61ff6df830224cfcae5cf6fc41c1fee3",
+      "parentId": null,
+      "modified": 1701130763509,
+      "created": 1701130763510,
+      "name": "SPRING BANK",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_1a7b9c3c1fe54084af44e1f3593b5158",
+      "parentId": "fld_a5bd2514d058437dae5d60b7110b81ce",
+      "modified": 1701132432602,
+      "created": 1701130842051,
+      "url": "{{ _.BASE_URL }}/users/14429688001",
+      "name": "New Request",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/8.4.5"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1701130776956,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_7511a0000a274158b0e980592febb748",
+      "parentId": "fld_d2af4ebdb531469b83ae9f730bd7c18f",
+      "modified": 1701132532755,
+      "created": 1701132504578,
+      "url": "{{ _.BASE_URL }}/accounts",
+      "name": "CREATE ACCOUNT",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"user\": 14429688001,\n\t\"type\": \"CURRENT\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/8.4.5"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1701132463353,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_d2af4ebdb531469b83ae9f730bd7c18f",
+      "parentId": "wrk_61ff6df830224cfcae5cf6fc41c1fee3",
+      "modified": 1701132466247,
+      "created": 1701132452334,
+      "name": "ACCOUNTS",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1701132452334,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_0eb796faa4524d13846282809d542f77",
+      "parentId": "fld_d2af4ebdb531469b83ae9f730bd7c18f",
+      "modified": 1701132483995,
+      "created": 1701132463253,
+      "url": "{{ _.BASE_URL }}/accounts",
+      "name": "GET ACCOUNTS",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/8.4.5"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1701132463253,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_d00c154490684f01e0a993ec44590f92e54933ab",
+      "parentId": "wrk_61ff6df830224cfcae5cf6fc41c1fee3",
+      "modified": 1701130763513,
+      "created": 1701130763513,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1701130763513,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_d00c154490684f01e0a993ec44590f92e54933ab",
+      "parentId": "wrk_61ff6df830224cfcae5cf6fc41c1fee3",
+      "modified": 1701130763515,
+      "created": 1701130763515,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "env_76f96ce057494376b865fcb182bc19e6",
+      "parentId": "env_d00c154490684f01e0a993ec44590f92e54933ab",
+      "modified": 1701130824010,
+      "created": 1701130794192,
+      "name": ".ENV",
+      "data": {
+        "BASE_URL": "http://127.0.0.1:8056/api/v1"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "BASE_URL"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1701130794192,
+      "_type": "environment"
+    }
+  ]
+}
