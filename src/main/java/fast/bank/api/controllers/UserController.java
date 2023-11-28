@@ -2,10 +2,10 @@ package fast.bank.api.controllers;
 
 import fast.bank.api.domain.user.dto.UserDetailingData;
 import fast.bank.api.domain.user.dto.UserRegistrationData;
-import fast.bank.api.domain.user.model.User;
 import fast.bank.api.domain.user.repository.UserRepository;
-import fast.bank.api.domain.user.service.UserDeletionService;
-import fast.bank.api.domain.user.service.UserRegistrationService;
+import fast.bank.api.domain.user.service.activation.UserActivationService;
+import fast.bank.api.domain.user.service.deletion.UserDeletionService;
+import fast.bank.api.domain.user.service.registration.UserRegistrationService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +24,17 @@ public class UserController {
     private UserRepository repository;
 
     @Autowired
+    UserRegistrationService registrationService;
+
+    @Autowired
     UserDeletionService deletionService;
 
     @Autowired
-    UserRegistrationService registrationService;
+    UserActivationService activationService;
 
     @PostMapping
     @Transactional
     public ResponseEntity<UserDetailingData> register(@RequestBody @Valid UserRegistrationData data, UriComponentsBuilder uriBuilder) {
-//        var user = new User(data);
-//        repository.save(user);
         var user = registrationService.createUser(data);
         var uri = uriBuilder.path("api/v1/users/{id}").buildAndExpand(user.getRegistry()).toUri();
         return ResponseEntity.created(uri).body(new UserDetailingData(user));
@@ -56,5 +57,12 @@ public class UserController {
     public ResponseEntity delete(@PathVariable Long registry) {
         deletionService.logicalUserDeletion(registry);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/activate/{registry}")
+    @Transactional
+    public ResponseEntity activate(@PathVariable Long registry) {
+        var user = activationService.activate(registry);
+        return ResponseEntity.ok(user);
     }
 }

@@ -33,4 +33,8 @@ public class User {
     public void logicalDeletion() {
         this.isActive = false;
     }
+
+    public void activate() {
+        this.isActive = true;
+    }
 }
