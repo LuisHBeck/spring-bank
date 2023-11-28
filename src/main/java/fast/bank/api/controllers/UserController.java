@@ -1,10 +1,11 @@
 package fast.bank.api.controllers;
 
-import fast.bank.api.domain.user.dto.UserListData;
+import fast.bank.api.domain.user.dto.UserDetailingData;
 import fast.bank.api.domain.user.dto.UserRegistrationData;
 import fast.bank.api.domain.user.model.User;
 import fast.bank.api.domain.user.repository.UserRepository;
 import fast.bank.api.domain.user.service.UserDeletionService;
+import fast.bank.api.domain.user.service.UserRegistrationService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,25 +26,29 @@ public class UserController {
     @Autowired
     UserDeletionService deletionService;
 
+    @Autowired
+    UserRegistrationService registrationService;
+
     @PostMapping
     @Transactional
-    public ResponseEntity<UserListData> register(@RequestBody @Valid UserRegistrationData data, UriComponentsBuilder uriBuilder) {
-        var user = new User(data);
-        repository.save(user);
+    public ResponseEntity<UserDetailingData> register(@RequestBody @Valid UserRegistrationData data, UriComponentsBuilder uriBuilder) {
+//        var user = new User(data);
+//        repository.save(user);
+        var user = registrationService.createUser(data);
         var uri = uriBuilder.path("api/v1/users/{id}").buildAndExpand(user.getRegistry()).toUri();
-        return ResponseEntity.created(uri).body(new UserListData(user));
+        return ResponseEntity.created(uri).body(new UserDetailingData(user));
     }
 
     @GetMapping
-    public ResponseEntity<Page<UserListData>> list(@PageableDefault(size = 10, sort = {"registry"}) Pageable pagination) {
-        var page = repository.findAllByIsActiveTrue(pagination).map(UserListData::new);
+    public ResponseEntity<Page<UserDetailingData>> list(@PageableDefault(size = 10, sort = {"registry"}) Pageable pagination) {
+        var page = repository.findAllByIsActiveTrue(pagination).map(UserDetailingData::new);
         return ResponseEntity.ok(page);
     }
 
     @GetMapping("/{registry}")
     public ResponseEntity listById(@PathVariable Long registry) {
         var user = repository.getReferenceById(registry);
-        return ResponseEntity.ok(new UserListData(user));
+        return ResponseEntity.ok(new UserDetailingData(user));
     }
 
     @DeleteMapping("/{registry}")
