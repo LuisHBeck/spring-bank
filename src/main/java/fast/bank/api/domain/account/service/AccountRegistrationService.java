@@ -6,6 +6,7 @@ import fast.bank.api.domain.account.model.Account;
 import fast.bank.api.domain.account.repository.AccountRepository;
 import fast.bank.api.domain.account.service.validation.AccountRegistrationValidators;
 import fast.bank.api.domain.user.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ public class AccountRegistrationService {
     @Autowired
     private List<AccountRegistrationValidators> validators;
 
+    @Transactional
     public AccountDetailingData createAccount(AccountRegistrationData data) {
         validators.forEach(v -> v.validate(data));
 

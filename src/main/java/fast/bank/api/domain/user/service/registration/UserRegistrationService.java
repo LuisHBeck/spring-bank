@@ -1,9 +1,8 @@
-package fast.bank.api.domain.user.service;
+package fast.bank.api.domain.user.service.registration;
 
 import fast.bank.api.domain.user.dto.UserRegistrationData;
 import fast.bank.api.domain.user.model.User;
 import fast.bank.api.domain.user.repository.UserRepository;
-import fast.bank.api.domain.user.service.validation.UserRegistrationValidators;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

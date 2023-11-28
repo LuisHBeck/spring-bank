@@ -1,4 +1,4 @@
-package fast.bank.api.domain.user.service;
+package fast.bank.api.domain.user.service.deletion;
 
 import fast.bank.api.domain.user.model.User;
 import fast.bank.api.domain.user.repository.UserRepository;

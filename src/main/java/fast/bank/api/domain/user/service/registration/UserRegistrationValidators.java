@@ -1,4 +1,4 @@
-package fast.bank.api.domain.user.service.validation;
+package fast.bank.api.domain.user.service.registration;
 
 import fast.bank.api.domain.user.dto.UserRegistrationData;
 
