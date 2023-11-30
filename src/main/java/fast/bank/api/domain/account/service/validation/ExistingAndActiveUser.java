@@ -1,6 +1,7 @@
 package fast.bank.api.domain.account.service.validation;
 
 import fast.bank.api.domain.account.dto.AccountRegistrationData;
+import fast.bank.api.domain.account.service.registration.AccountRegistrationValidators;
 import fast.bank.api.domain.user.repository.UserRepository;
 import fast.bank.api.infra.exception.validation.ValidException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long number;
 
     @ManyToOne
@@ -42,5 +42,13 @@ public class Account {
         this.balance = balance;
         this.creditLimit = creditLimit;
         this.isActive = true;
+    }
+
+    public void discount(Double transferAmount) {
+        this.balance -= transferAmount;
+    }
+
+    public void debit(Double transferAmount) {
+        this.balance += transferAmount;
     }
 }
