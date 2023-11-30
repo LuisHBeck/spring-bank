@@ -49,6 +49,11 @@ public class AccountController {
         return ResponseEntity.ok(new AccountDetailingData(account));
     }
 
+    @DeleteMapping("/{number}")
+    public ResponseEntity delete(@PathVariable Long number) {
+
+    }
+
     @PostMapping("/transfer")
     @Transactional
     public ResponseEntity newTransfer(@RequestBody @Valid AccountTransferData data) {

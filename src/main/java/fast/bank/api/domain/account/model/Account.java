@@ -51,4 +51,8 @@ public class Account {
     public void debit(Double transferAmount) {
         this.balance += transferAmount;
     }
+
+    public void logicalDeletion() {
+        this.isActive = false;
+    }
 }
