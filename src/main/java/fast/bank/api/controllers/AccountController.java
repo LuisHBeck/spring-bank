@@ -4,6 +4,7 @@ import fast.bank.api.domain.account.dto.AccountDetailingData;
 import fast.bank.api.domain.account.dto.AccountRegistrationData;
 import fast.bank.api.domain.account.dto.AccountTransactionData;
 import fast.bank.api.domain.account.repository.AccountRepository;
+import fast.bank.api.domain.account.service.deletion.AccountDeletionService;
 import fast.bank.api.domain.account.service.registration.AccountRegistrationService;
 import fast.bank.api.domain.account.service.transfer.AccountTransactionService;
 import jakarta.transaction.Transactional;
@@ -25,6 +26,9 @@ public class AccountController {
 
     @Autowired
     private AccountRegistrationService registrationService;
+
+    @Autowired
+    private AccountDeletionService deletionService;
 
     @Autowired
     private AccountTransactionService transactionService;
@@ -49,10 +53,11 @@ public class AccountController {
         return ResponseEntity.ok(new AccountDetailingData(account));
     }
 
-//    @DeleteMapping("/{number}")
-//    public ResponseEntity delete(@PathVariable Long number) {
-//
-//    }
+    @DeleteMapping("/{number}")
+    public ResponseEntity delete(@PathVariable Long number) {
+        deletionService.logicalAccountDeletion(number);
+        return ResponseEntity.noContent().build();
+    }
 
     @PostMapping("/transfer")
     @Transactional
