@@ -1,7 +1,7 @@
-package fast.bank.api.domain.account.service.validation;
+package fast.bank.api.domain.account.service.transfer.validation;
 
 import fast.bank.api.domain.account.dto.AccountTransactionData;
-import fast.bank.api.domain.account.service.transfer.AccountTransactionValidators;
+import fast.bank.api.domain.account.service.transfer.validation.AccountTransactionValidators;
 import fast.bank.api.infra.exception.validation.ValidException;
 import org.springframework.stereotype.Component;
 

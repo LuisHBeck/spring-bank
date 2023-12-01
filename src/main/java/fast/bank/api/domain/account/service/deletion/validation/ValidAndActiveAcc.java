@@ -1,8 +1,8 @@
-package fast.bank.api.domain.account.service.validation;
+package fast.bank.api.domain.account.service.deletion.validation;
 
 import fast.bank.api.domain.account.model.Account;
 import fast.bank.api.domain.account.repository.AccountRepository;
-import fast.bank.api.domain.account.service.deletion.AccountDeletionValidators;
+import fast.bank.api.domain.account.service.deletion.validation.AccountDeletionValidators;
 import fast.bank.api.infra.exception.validation.ValidException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
