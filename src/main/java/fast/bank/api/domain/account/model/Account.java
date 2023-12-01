@@ -55,4 +55,8 @@ public class Account {
     public void logicalDeletion() {
         this.isActive = false;
     }
+
+    public void activate() {
+        this.isActive = true;
+    }
 }
