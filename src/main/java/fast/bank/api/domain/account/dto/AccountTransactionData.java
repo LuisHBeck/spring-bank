@@ -3,14 +3,14 @@ package fast.bank.api.domain.account.dto;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.validation.constraints.NotNull;
 
-public record AccountTransferData(
+public record AccountTransactionData(
         @NotNull
         @JsonAlias({"receiver"})
         Long receiverAccNumber,
 
         @NotNull
-        @JsonAlias({"transferring"})
-        Long transferringAccNumber,
+        @JsonAlias({"sender"})
+        Long senderAccNumber,
 
         @NotNull
         @JsonAlias({"amount"})

@@ -1,6 +1,6 @@
 package fast.bank.api.domain.account.service.transfer;
 
-import fast.bank.api.domain.account.dto.AccountTransferData;
+import fast.bank.api.domain.account.dto.AccountTransactionData;
 import fast.bank.api.domain.account.repository.AccountRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,23 +9,23 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AccountTransferService {
+public class AccountTransactionService {
 
     @Autowired
     private AccountRepository repository;
 
     @Autowired
-    private List<AccountTransferValidators> validators;
+    private List<AccountTransactionValidators> validators;
 
     @Transactional
-    public AccountTransferData transfer(AccountTransferData data) {
+    public AccountTransactionData transfer(AccountTransactionData data) {
         validators.forEach(v -> v.validate(data));
 
         var receiverAcc = repository.getReferenceById(data.receiverAccNumber());
-        var transferringAcc = repository.getReferenceById(data.transferringAccNumber());
+        var senderAcc = repository.getReferenceById(data.senderAccNumber());
         var transferAmount = data.transferAmount();
 
-        transferringAcc.discount(transferAmount);
+        senderAcc.discount(transferAmount);
         receiverAcc.debit(transferAmount);
         return data;
     }

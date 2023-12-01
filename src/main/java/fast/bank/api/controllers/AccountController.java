@@ -2,10 +2,10 @@ package fast.bank.api.controllers;
 
 import fast.bank.api.domain.account.dto.AccountDetailingData;
 import fast.bank.api.domain.account.dto.AccountRegistrationData;
-import fast.bank.api.domain.account.dto.AccountTransferData;
+import fast.bank.api.domain.account.dto.AccountTransactionData;
 import fast.bank.api.domain.account.repository.AccountRepository;
 import fast.bank.api.domain.account.service.registration.AccountRegistrationService;
-import fast.bank.api.domain.account.service.transfer.AccountTransferService;
+import fast.bank.api.domain.account.service.transfer.AccountTransactionService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class AccountController {
     private AccountRegistrationService registrationService;
 
     @Autowired
-    private AccountTransferService transferService;
+    private AccountTransactionService transactionService;
 
     @PostMapping
     @Transactional
@@ -49,16 +49,16 @@ public class AccountController {
         return ResponseEntity.ok(new AccountDetailingData(account));
     }
 
-    @DeleteMapping("/{number}")
-    public ResponseEntity delete(@PathVariable Long number) {
-
-    }
+//    @DeleteMapping("/{number}")
+//    public ResponseEntity delete(@PathVariable Long number) {
+//
+//    }
 
     @PostMapping("/transfer")
     @Transactional
-    public ResponseEntity newTransfer(@RequestBody @Valid AccountTransferData data) {
-        var transference = transferService.transfer(data);
-        return ResponseEntity.ok(transference);
+    public ResponseEntity newTransfer(@RequestBody @Valid AccountTransactionData data) {
+        var transaction = transactionService.transfer(data);
+        return ResponseEntity.ok(transaction);
     }
 
 }

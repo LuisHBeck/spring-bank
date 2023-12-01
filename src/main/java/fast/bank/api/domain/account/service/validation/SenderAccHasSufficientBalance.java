@@ -1,22 +1,22 @@
 package fast.bank.api.domain.account.service.validation;
 
-import fast.bank.api.domain.account.dto.AccountTransferData;
+import fast.bank.api.domain.account.dto.AccountTransactionData;
 import fast.bank.api.domain.account.repository.AccountRepository;
-import fast.bank.api.domain.account.service.transfer.AccountTransferValidators;
+import fast.bank.api.domain.account.service.transfer.AccountTransactionValidators;
 import fast.bank.api.infra.exception.validation.ValidException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TransferAccHasSufficientBalance implements AccountTransferValidators {
+public class SenderAccHasSufficientBalance implements AccountTransactionValidators {
 
     @Autowired
     private AccountRepository repository;
 
     @Override
-    public void validate(AccountTransferData data) {
-        var transferAcc = repository.getReferenceById(data.transferringAccNumber());
-        var balance = transferAcc.getBalance();
+    public void validate(AccountTransactionData data) {
+        var senderAcc = repository.getReferenceById(data.senderAccNumber());
+        var balance = senderAcc.getBalance();
         if(data.transferAmount() > balance) throw new ValidException("Insufficient balance for this transfer!");
     }
 }
