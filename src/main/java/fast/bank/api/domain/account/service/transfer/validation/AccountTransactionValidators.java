@@ -1,7 +1,7 @@
 package fast.bank.api.domain.account.service.transfer.validation;
 
-import fast.bank.api.domain.account.dto.AccountTransactionData;
+import fast.bank.api.domain.account.dto.AccountTransactionRequestData;
 
 public interface AccountTransactionValidators {
-    void validate(AccountTransactionData data);
+    void validate(AccountTransactionRequestData data);
 }

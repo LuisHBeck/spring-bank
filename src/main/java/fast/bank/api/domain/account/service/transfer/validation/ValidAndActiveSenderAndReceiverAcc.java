@@ -1,6 +1,6 @@
 package fast.bank.api.domain.account.service.transfer.validation;
 
-import fast.bank.api.domain.account.dto.AccountTransactionData;
+import fast.bank.api.domain.account.dto.AccountTransactionRequestData;
 import fast.bank.api.domain.account.repository.AccountRepository;
 import fast.bank.api.infra.exception.validation.ValidException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ public class ValidAndActiveSenderAndReceiverAcc implements AccountTransactionVal
     private AccountRepository repository;
 
     @Override
-    public void validate(AccountTransactionData data) {
+    public void validate(AccountTransactionRequestData data) {
         var senderAccIsActiveAndValid = repository.existsByNumberAndIsActiveTrue(data.senderAccNumber());
         var receiverAccIsActiveAndValid = repository.existsByNumberAndIsActiveTrue(data.receiverAccNumber());
 

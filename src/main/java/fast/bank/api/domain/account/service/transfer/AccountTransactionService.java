@@ -1,6 +1,7 @@
 package fast.bank.api.domain.account.service.transfer;
 
-import fast.bank.api.domain.account.dto.AccountTransactionData;
+import fast.bank.api.domain.account.dto.AccountTransactionRequestData;
+import fast.bank.api.domain.account.dto.AccountTransactionResponseData;
 import fast.bank.api.domain.account.repository.AccountRepository;
 import fast.bank.api.domain.account.service.transfer.validation.AccountTransactionValidators;
 import jakarta.transaction.Transactional;
@@ -19,7 +20,7 @@ public class AccountTransactionService {
     private List<AccountTransactionValidators> validators;
 
     @Transactional
-    public AccountTransactionData transfer(AccountTransactionData data) {
+    public AccountTransactionResponseData transfer(AccountTransactionRequestData data) {
         validators.forEach(v -> v.validate(data));
 
         var receiverAcc = repository.getReferenceById(data.receiverAccNumber());
@@ -28,6 +29,6 @@ public class AccountTransactionService {
 
         senderAcc.discount(transferAmount);
         receiverAcc.debit(transferAmount);
-        return data;
+        return new AccountTransactionResponseData(senderAcc.getNumber(), receiverAcc.getNumber(), transferAmount, senderAcc.getBalance());
     }
 }

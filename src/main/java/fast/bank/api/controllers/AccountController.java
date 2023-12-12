@@ -2,7 +2,7 @@ package fast.bank.api.controllers;
 
 import fast.bank.api.domain.account.dto.AccountDetailingData;
 import fast.bank.api.domain.account.dto.AccountRegistrationData;
-import fast.bank.api.domain.account.dto.AccountTransactionData;
+import fast.bank.api.domain.account.dto.AccountTransactionRequestData;
 import fast.bank.api.domain.account.repository.AccountRepository;
 import fast.bank.api.domain.account.service.activation.AccountActivationService;
 import fast.bank.api.domain.account.service.deletion.AccountDeletionService;
@@ -73,7 +73,7 @@ public class AccountController {
 
     @PostMapping("/transfer")
     @Transactional
-    public ResponseEntity newTransfer(@RequestBody @Valid AccountTransactionData data) {
+    public ResponseEntity newTransfer(@RequestBody @Valid AccountTransactionRequestData data) {
         var transaction = transactionService.transfer(data);
         return ResponseEntity.ok(transaction);
     }
