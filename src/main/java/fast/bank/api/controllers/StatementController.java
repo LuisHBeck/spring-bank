@@ -1,5 +1,6 @@
 package fast.bank.api.controllers;
 
+import fast.bank.api.domain.statement.dto.StatementDetailingData;
 import fast.bank.api.domain.statement.repository.StatementRepository;
 import fast.bank.api.domain.statement.service.list.ListAccStatementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class StatementController {
     private ListAccStatementService listAccStatementService;
 
     @GetMapping("/{account}")
-    public ResponseEntity<Page> list(@PathVariable Long account, @PageableDefault(size = 10, sort = {"id"}) Pageable pagination) {
+    public ResponseEntity<Page<StatementDetailingData>> list(@PathVariable Long account, @PageableDefault(size = 10, sort = {"id"}) Pageable pagination) {
         var page = listAccStatementService.list(account, pagination);
         return ResponseEntity.ok(page);
     }
