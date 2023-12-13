@@ -8,6 +8,8 @@ import fast.bank.api.domain.account.service.activation.AccountActivationService;
 import fast.bank.api.domain.account.service.deletion.AccountDeletionService;
 import fast.bank.api.domain.account.service.registration.AccountRegistrationService;
 import fast.bank.api.domain.account.service.transfer.AccountTransactionService;
+import fast.bank.api.domain.statement.dto.StatementDetailingData;
+import fast.bank.api.domain.statement.service.list.ListAccStatementService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,9 @@ public class AccountController {
 
     @Autowired
     private AccountTransactionService transactionService;
+
+    @Autowired
+    private ListAccStatementService listAccStatementService;
 
     @PostMapping
     @Transactional
@@ -78,4 +83,9 @@ public class AccountController {
         return ResponseEntity.ok(transaction);
     }
 
+    @GetMapping("/{account}/statement")
+    public ResponseEntity<Page<StatementDetailingData>> list(@PathVariable Long account, @PageableDefault(size = 10, sort = {"id"}) Pageable pagination) {
+        var page = listAccStatementService.list(account, pagination);
+        return ResponseEntity.ok(page);
+    }
 }
