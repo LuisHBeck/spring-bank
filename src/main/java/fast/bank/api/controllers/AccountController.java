@@ -9,6 +9,7 @@ import fast.bank.api.domain.account.service.deletion.AccountDeletionService;
 import fast.bank.api.domain.account.service.registration.AccountRegistrationService;
 import fast.bank.api.domain.account.service.transfer.AccountTransactionService;
 import fast.bank.api.domain.statement.dto.StatementDetailingData;
+import fast.bank.api.domain.statement.repository.StatementRepository;
 import fast.bank.api.domain.statement.service.list.ListAccStatementService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -26,6 +27,9 @@ public class AccountController {
 
     @Autowired
     private AccountRepository repository;
+
+    @Autowired
+    private StatementRepository statementRepository;
 
     @Autowired
     private AccountRegistrationService registrationService;
@@ -87,5 +91,11 @@ public class AccountController {
     public ResponseEntity<Page<StatementDetailingData>> list(@PathVariable Long account, @PageableDefault(size = 10, sort = {"id"}) Pageable pagination) {
         var page = listAccStatementService.list(account, pagination);
         return ResponseEntity.ok(page);
+    }
+
+    @GetMapping("/{account}/statement/{id}")
+    public ResponseEntity detailStatement(@PathVariable Long id) {
+        var statement = statementRepository.getReferenceById(id);
+        return ResponseEntity.ok(new StatementDetailingData(statement));
     }
 }
