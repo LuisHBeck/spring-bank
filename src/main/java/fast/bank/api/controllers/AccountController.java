@@ -8,9 +8,14 @@ import fast.bank.api.domain.account.service.activation.AccountActivationService;
 import fast.bank.api.domain.account.service.deletion.AccountDeletionService;
 import fast.bank.api.domain.account.service.registration.AccountRegistrationService;
 import fast.bank.api.domain.account.service.transfer.AccountTransactionService;
+import fast.bank.api.domain.card.dto.CardDetailingData;
+import fast.bank.api.domain.card.dto.CardListData;
+import fast.bank.api.domain.card.repository.CardRepository;
+import fast.bank.api.domain.card.service.list.CardListingService;
+import fast.bank.api.domain.card.service.registration.CardRegistrationService;
 import fast.bank.api.domain.statement.dto.StatementDetailingData;
 import fast.bank.api.domain.statement.repository.StatementRepository;
-import fast.bank.api.domain.statement.service.list.ListAccStatementService;
+import fast.bank.api.domain.statement.service.list.StatementListingService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +37,9 @@ public class AccountController {
     private StatementRepository statementRepository;
 
     @Autowired
+    private CardRepository cardRepository;
+
+    @Autowired
     private AccountRegistrationService registrationService;
 
     @Autowired
@@ -44,7 +52,13 @@ public class AccountController {
     private AccountTransactionService transactionService;
 
     @Autowired
-    private ListAccStatementService listAccStatementService;
+    private StatementListingService listAccStatementService;
+
+    @Autowired
+    private CardRegistrationService cardRegistrationService;
+
+    @Autowired
+    private CardListingService cardListingService;
 
     @PostMapping
     @Transactional
@@ -88,7 +102,7 @@ public class AccountController {
     }
 
     @GetMapping("/{account}/statement")
-    public ResponseEntity<Page<StatementDetailingData>> list(@PathVariable Long account, @PageableDefault(size = 10, sort = {"id"}) Pageable pagination) {
+    public ResponseEntity<Page<StatementDetailingData>> listStatements(@PathVariable Long account, @PageableDefault(size = 10, sort = {"id"}) Pageable pagination) {
         var page = listAccStatementService.list(account, pagination);
         return ResponseEntity.ok(page);
     }
@@ -97,5 +111,25 @@ public class AccountController {
     public ResponseEntity detailStatement(@PathVariable Long id) {
         var statement = statementRepository.getReferenceById(id);
         return ResponseEntity.ok(new StatementDetailingData(statement));
+    }
+
+    @PostMapping("/{account}/cards/new")
+    @Transactional
+    public ResponseEntity newCard(@PathVariable Long account, UriComponentsBuilder uriBuilder) {
+        var card = cardRegistrationService.register(account);
+        var uri = uriBuilder.path("api/v1/accounts/{account}/cards/{number}").buildAndExpand(card.account(), card.number()).toUri();
+        return ResponseEntity.created(uri).body(card);
+    }
+
+    @GetMapping("/{account}/cards")
+    public ResponseEntity<Page<CardListData>> listCards(@PathVariable Long account, @PageableDefault(size = 10, sort = {"id"}) Pageable pagination) {
+        var page = cardListingService.list(account, pagination);
+        return ResponseEntity.ok(page);
+    }
+
+    @GetMapping("/{account}/cards/{number}")
+    public ResponseEntity detailingCard(@PathVariable Long account, @PathVariable Long number) {
+        var card = cardRepository.getReferenceByNumber(number);
+        return ResponseEntity.ok(new CardDetailingData(card));
     }
 }
