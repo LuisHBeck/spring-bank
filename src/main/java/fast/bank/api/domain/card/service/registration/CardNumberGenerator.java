@@ -3,7 +3,7 @@ package fast.bank.api.domain.card.service.registration;
 import java.util.Random;
 
 public class CardNumberGenerator {
-    public static Long generate(int numberLength) {
+    static Long generate(int numberLength) {
         Random random = new Random();
         Long number = 0l;
 
