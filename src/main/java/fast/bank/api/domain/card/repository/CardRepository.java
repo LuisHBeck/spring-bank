@@ -12,4 +12,6 @@ public interface CardRepository extends JpaRepository<Card, Long> {
     Page<Card> findAllByAccount(Optional<Account> account, Pageable pageable);
 
     Card getReferenceByNumber(Long number);
+
+    Long countByAccount(Account account);
 }
