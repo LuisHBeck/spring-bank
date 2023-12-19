@@ -52,6 +52,10 @@ public class Account {
         this.balance += transferAmount;
     }
 
+    public void cardDiscount(Double transactionAmount) {
+        this.creditLimit -= transactionAmount;
+    }
+
     public void logicalDeletion() {
         this.isActive = false;
     }

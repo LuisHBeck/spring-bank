@@ -10,9 +10,11 @@ import fast.bank.api.domain.account.service.registration.AccountRegistrationServ
 import fast.bank.api.domain.account.service.transfer.AccountTransactionService;
 import fast.bank.api.domain.card.dto.CardDetailingData;
 import fast.bank.api.domain.card.dto.CardListData;
+import fast.bank.api.domain.card.dto.CardTransactionData;
 import fast.bank.api.domain.card.repository.CardRepository;
 import fast.bank.api.domain.card.service.list.CardListingService;
 import fast.bank.api.domain.card.service.registration.CardRegistrationService;
+import fast.bank.api.domain.card.service.transaction.CardTransactionService;
 import fast.bank.api.domain.statement.dto.StatementDetailingData;
 import fast.bank.api.domain.statement.repository.StatementRepository;
 import fast.bank.api.domain.statement.service.list.StatementListingService;
@@ -59,6 +61,9 @@ public class AccountController {
 
     @Autowired
     private CardListingService cardListingService;
+
+    @Autowired
+    private CardTransactionService cardTransactionService;
 
     @PostMapping
     @Transactional
@@ -131,5 +136,12 @@ public class AccountController {
     public ResponseEntity detailingCard(@PathVariable Long account, @PathVariable Long number) {
         var card = cardRepository.getReferenceByNumber(number);
         return ResponseEntity.ok(new CardDetailingData(card));
+    }
+
+    @PostMapping("/{account}/cards/{number}/transaction")
+    @Transactional
+    public ResponseEntity cardTransaction(@PathVariable Long account, @PathVariable Long number, @RequestBody @Valid CardTransactionData data) {
+        var transactionData = cardTransactionService.makeTransaction(data, account);
+        return ResponseEntity.ok(transactionData);
     }
 }
