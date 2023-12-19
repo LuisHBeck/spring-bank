@@ -1,7 +1,7 @@
 package fast.bank.api.domain.card.service.transaction.validation;
 
-import fast.bank.api.domain.card.model.Card;
+import fast.bank.api.domain.card.dto.CardTransactionData;
 
 public interface CardTransactionValidators {
-    void validate();
+    void validate(CardTransactionData data, Long cardNumber);
 }

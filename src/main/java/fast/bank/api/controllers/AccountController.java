@@ -141,7 +141,7 @@ public class AccountController {
     @PostMapping("/{account}/cards/{number}/transaction")
     @Transactional
     public ResponseEntity cardTransaction(@PathVariable Long account, @PathVariable Long number, @RequestBody @Valid CardTransactionData data) {
-        var transactionData = cardTransactionService.makeTransaction(data, account);
+        var transactionData = cardTransactionService.makeTransaction(data, account, number);
         return ResponseEntity.ok(transactionData);
     }
 }
