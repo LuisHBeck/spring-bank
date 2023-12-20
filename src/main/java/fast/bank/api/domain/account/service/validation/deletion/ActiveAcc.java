@@ -1,4 +1,4 @@
-package fast.bank.api.domain.account.service.deletion.validation;
+package fast.bank.api.domain.account.service.validation.deletion;
 
 import fast.bank.api.domain.account.model.Account;
 import fast.bank.api.domain.account.repository.AccountRepository;

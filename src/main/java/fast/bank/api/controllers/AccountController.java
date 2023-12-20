@@ -6,7 +6,6 @@ import fast.bank.api.domain.account.dto.AccountTransactionRequestData;
 import fast.bank.api.domain.account.repository.AccountRepository;
 import fast.bank.api.domain.account.service.AccountService;
 import fast.bank.api.domain.account.service.activation.AccountActivationService;
-import fast.bank.api.domain.account.service.deletion.AccountDeletionService;
 import fast.bank.api.domain.card.dto.CardDetailingData;
 import fast.bank.api.domain.card.dto.CardListData;
 import fast.bank.api.domain.card.dto.CardTransactionData;
@@ -42,9 +41,6 @@ public class AccountController {
 
     @Autowired
     private AccountService accountService;
-
-    @Autowired
-    private AccountDeletionService deletionService;
 
     @Autowired
     private AccountActivationService activationService;
@@ -84,7 +80,7 @@ public class AccountController {
     @DeleteMapping("/{number}")
     @Transactional
     public ResponseEntity delete(@PathVariable Long number) {
-        deletionService.logicalAccountDeletion(number);
+        accountService.delete(number);
         return ResponseEntity.noContent().build();
     }
 
