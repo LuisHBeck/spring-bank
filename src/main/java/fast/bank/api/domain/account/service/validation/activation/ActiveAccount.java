@@ -1,4 +1,4 @@
-package fast.bank.api.domain.account.service.activation.validation;
+package fast.bank.api.domain.account.service.validation.activation;
 
 import fast.bank.api.domain.account.model.Account;
 import fast.bank.api.domain.account.repository.AccountRepository;

@@ -5,7 +5,6 @@ import fast.bank.api.domain.account.dto.AccountRegistrationData;
 import fast.bank.api.domain.account.dto.AccountTransactionRequestData;
 import fast.bank.api.domain.account.repository.AccountRepository;
 import fast.bank.api.domain.account.service.AccountService;
-import fast.bank.api.domain.account.service.activation.AccountActivationService;
 import fast.bank.api.domain.card.dto.CardDetailingData;
 import fast.bank.api.domain.card.dto.CardListData;
 import fast.bank.api.domain.card.dto.CardTransactionData;
@@ -41,9 +40,6 @@ public class AccountController {
 
     @Autowired
     private AccountService accountService;
-
-    @Autowired
-    private AccountActivationService activationService;
 
     @Autowired
     private StatementService listAccStatementService;
@@ -87,7 +83,8 @@ public class AccountController {
     @PutMapping("/activate/{number}")
     @Transactional
     public ResponseEntity activate(@PathVariable Long number) {
-        var account = activationService.activateAccount(number);
+//        var account = activationService.activateAccount(number);
+        var account = accountService.activate(number);
         return ResponseEntity.ok(account);
     }
 

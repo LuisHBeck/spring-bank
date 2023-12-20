@@ -6,6 +6,7 @@ import fast.bank.api.domain.account.dto.AccountTransactionRequestData;
 import fast.bank.api.domain.account.dto.AccountTransactionResponseData;
 import fast.bank.api.domain.account.model.Account;
 import fast.bank.api.domain.account.repository.AccountRepository;
+import fast.bank.api.domain.account.service.validation.activation.AccountActivationValidators;
 import fast.bank.api.domain.account.service.validation.deletion.AccountDeletionValidators;
 import fast.bank.api.domain.account.service.validation.registration.AccountRegistrationValidators;
 import fast.bank.api.domain.account.service.validation.transaction.AccountTransactionValidators;
@@ -39,6 +40,9 @@ public class AccountService {
 
     @Autowired
     private List<AccountDeletionValidators> deletionValidators;
+
+    @Autowired
+    private List<AccountActivationValidators> activationValidators;
 
     @Transactional
     public AccountDetailingData register(AccountRegistrationData data) {
@@ -77,8 +81,13 @@ public class AccountService {
         account.logicalDeletion();
     }
 
-    public void activate() {
+    @Transactional
+    public AccountDetailingData activate(Long number) {
+        var account = accountRepository.getReferenceById(number);
+        activationValidators.forEach(v -> v.validate(account));
+        account.activate();
 
+        return new AccountDetailingData(account);
     }
 
 
