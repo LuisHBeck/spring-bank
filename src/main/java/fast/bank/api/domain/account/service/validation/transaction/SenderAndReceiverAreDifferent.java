@@ -1,4 +1,4 @@
-package fast.bank.api.domain.account.service.transfer.validation;
+package fast.bank.api.domain.account.service.validation.transaction;
 
 import fast.bank.api.domain.account.dto.AccountTransactionRequestData;
 import fast.bank.api.infra.exception.validation.ValidException;

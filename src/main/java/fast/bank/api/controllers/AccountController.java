@@ -7,7 +7,6 @@ import fast.bank.api.domain.account.repository.AccountRepository;
 import fast.bank.api.domain.account.service.AccountService;
 import fast.bank.api.domain.account.service.activation.AccountActivationService;
 import fast.bank.api.domain.account.service.deletion.AccountDeletionService;
-import fast.bank.api.domain.account.service.transfer.AccountTransactionService;
 import fast.bank.api.domain.card.dto.CardDetailingData;
 import fast.bank.api.domain.card.dto.CardListData;
 import fast.bank.api.domain.card.dto.CardTransactionData;
@@ -49,9 +48,6 @@ public class AccountController {
 
     @Autowired
     private AccountActivationService activationService;
-
-    @Autowired
-    private AccountTransactionService transactionService;
 
     @Autowired
     private StatementService listAccStatementService;
@@ -102,7 +98,7 @@ public class AccountController {
     @PostMapping("/transfer")
     @Transactional
     public ResponseEntity newTransfer(@RequestBody @Valid AccountTransactionRequestData data) {
-        var transaction = transactionService.transfer(data);
+        var transaction = accountService.transfer(data);
         return ResponseEntity.ok(transaction);
     }
 
