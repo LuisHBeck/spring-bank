@@ -10,7 +10,7 @@ import fast.bank.api.domain.card.dto.CardListData;
 import fast.bank.api.domain.card.dto.CardTransactionData;
 import fast.bank.api.domain.card.repository.CardRepository;
 import fast.bank.api.domain.card.service.CardService;
-import fast.bank.api.domain.card.service.transaction.CardTransactionService;
+
 import fast.bank.api.domain.statement.dto.StatementDetailingData;
 import fast.bank.api.domain.statement.repository.StatementRepository;
 import fast.bank.api.domain.statement.service.StatementService;
@@ -44,10 +44,8 @@ public class AccountController {
     private CardService cardService;
 
     @Autowired
-    private StatementService listAccStatementService;
+    private StatementService statementService;
 
-    @Autowired
-    private CardTransactionService cardTransactionService;
 
     @PostMapping
     @Transactional
@@ -92,7 +90,7 @@ public class AccountController {
 
     @GetMapping("/{account}/statement")
     public ResponseEntity<Page<StatementDetailingData>> listStatements(@PathVariable Long account, @PageableDefault(size = 10, sort = {"id"}) Pageable pagination) {
-        var page = listAccStatementService.list(account, pagination);
+        var page = statementService.list(account, pagination);
         return ResponseEntity.ok(page);
     }
 
