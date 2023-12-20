@@ -17,7 +17,7 @@ import fast.bank.api.domain.card.service.registration.CardRegistrationService;
 import fast.bank.api.domain.card.service.transaction.CardTransactionService;
 import fast.bank.api.domain.statement.dto.StatementDetailingData;
 import fast.bank.api.domain.statement.repository.StatementRepository;
-import fast.bank.api.domain.statement.service.list.StatementListingService;
+import fast.bank.api.domain.statement.service.StatementService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +54,7 @@ public class AccountController {
     private AccountTransactionService transactionService;
 
     @Autowired
-    private StatementListingService listAccStatementService;
+    private StatementService listAccStatementService;
 
     @Autowired
     private CardRegistrationService cardRegistrationService;

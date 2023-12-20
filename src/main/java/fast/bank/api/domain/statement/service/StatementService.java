@@ -1,4 +1,4 @@
-package fast.bank.api.domain.statement.service.list;
+package fast.bank.api.domain.statement.service;
 
 import fast.bank.api.domain.account.repository.AccountRepository;
 import fast.bank.api.domain.statement.dto.StatementDetailingData;
@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StatementListingService {
+public class StatementService {
 
     @Autowired
     private StatementRepository statementRepository;
