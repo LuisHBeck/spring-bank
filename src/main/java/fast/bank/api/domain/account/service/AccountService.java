@@ -1,10 +1,10 @@
-package fast.bank.api.domain.account.service.registration;
+package fast.bank.api.domain.account.service;
 
 import fast.bank.api.domain.account.dto.AccountDetailingData;
 import fast.bank.api.domain.account.dto.AccountRegistrationData;
 import fast.bank.api.domain.account.model.Account;
 import fast.bank.api.domain.account.repository.AccountRepository;
-import fast.bank.api.domain.account.service.registration.validation.AccountRegistrationValidators;
+import fast.bank.api.domain.account.service.validation.registration.AccountRegistrationValidators;
 import fast.bank.api.domain.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AccountRegistrationService {
+public class AccountService {
 
     @Autowired
     private AccountRepository accountRepository;
@@ -22,11 +22,11 @@ public class AccountRegistrationService {
     private UserRepository userRepository;
 
     @Autowired
-    private List<AccountRegistrationValidators> validators;
+    private List<AccountRegistrationValidators> registrationValidators;
 
     @Transactional
-    public AccountDetailingData createAccount(AccountRegistrationData data) {
-        validators.forEach(v -> v.validate(data));
+    public AccountDetailingData register(AccountRegistrationData data) {
+        registrationValidators.forEach(v -> v.validate(data));
 
         var user = userRepository.getReferenceById(data.userRegistry());
         var accType = data.accountType();
@@ -36,4 +36,18 @@ public class AccountRegistrationService {
 
         return new AccountDetailingData(user.getRegistry(), account.getNumber(), account.getAgency(), account.getBalance(), account.getCreditLimit());
     }
+
+    public void transfer() {
+
+    }
+
+    public void delete() {
+
+    }
+
+    public void activate() {
+
+    }
+
+
 }

@@ -4,9 +4,9 @@ import fast.bank.api.domain.account.dto.AccountDetailingData;
 import fast.bank.api.domain.account.dto.AccountRegistrationData;
 import fast.bank.api.domain.account.dto.AccountTransactionRequestData;
 import fast.bank.api.domain.account.repository.AccountRepository;
+import fast.bank.api.domain.account.service.AccountService;
 import fast.bank.api.domain.account.service.activation.AccountActivationService;
 import fast.bank.api.domain.account.service.deletion.AccountDeletionService;
-import fast.bank.api.domain.account.service.registration.AccountRegistrationService;
 import fast.bank.api.domain.account.service.transfer.AccountTransactionService;
 import fast.bank.api.domain.card.dto.CardDetailingData;
 import fast.bank.api.domain.card.dto.CardListData;
@@ -33,7 +33,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class AccountController {
 
     @Autowired
-    private AccountRepository repository;
+    private AccountRepository accountRepository;
 
     @Autowired
     private StatementRepository statementRepository;
@@ -42,7 +42,7 @@ public class AccountController {
     private CardRepository cardRepository;
 
     @Autowired
-    private AccountRegistrationService registrationService;
+    private AccountService accountService;
 
     @Autowired
     private AccountDeletionService deletionService;
@@ -68,20 +68,20 @@ public class AccountController {
     @PostMapping
     @Transactional
     public ResponseEntity register(@RequestBody @Valid AccountRegistrationData data, UriComponentsBuilder uriBuilder) {
-        var account = registrationService.createAccount(data);
+        var account = accountService.register(data);
         var uri = uriBuilder.path("api/v1/accounts{registry}").build(account.number());
         return ResponseEntity.created(uri).body(account);
     }
 
     @GetMapping
     public ResponseEntity<Page<AccountDetailingData>> list(@PageableDefault(size = 10, sort = {"number"}) Pageable pagination) {
-        var page = repository.findAllByIsActiveTrue(pagination).map(AccountDetailingData::new);
+        var page = accountRepository.findAllByIsActiveTrue(pagination).map(AccountDetailingData::new);
         return ResponseEntity.ok(page);
     }
 
     @GetMapping("/{number}")
     public ResponseEntity listById(@PathVariable Long number) {
-        var account = repository.getReferenceById(number);
+        var account = accountRepository.getReferenceById(number);
         return ResponseEntity.ok(new AccountDetailingData(account));
     }
 
