@@ -3,7 +3,7 @@ package fast.bank.api.domain.card.service.transaction;
 import fast.bank.api.domain.account.repository.AccountRepository;
 import fast.bank.api.domain.card.dto.CardTransactionData;
 import fast.bank.api.domain.card.repository.CardRepository;
-import fast.bank.api.domain.card.service.transaction.validation.CardTransactionValidators;
+import fast.bank.api.domain.card.service.validation.transaction.CardTransactionValidators;
 import fast.bank.api.domain.statement.dto.StatementDetailingData;
 import fast.bank.api.domain.statement.model.Statement;
 import fast.bank.api.domain.statement.model.TransactionType;

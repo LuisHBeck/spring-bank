@@ -1,4 +1,4 @@
-package fast.bank.api.domain.card.service.transaction.validation;
+package fast.bank.api.domain.card.service.validation.transaction;
 
 import fast.bank.api.domain.card.dto.CardTransactionData;
 import fast.bank.api.domain.card.repository.CardRepository;

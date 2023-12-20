@@ -9,8 +9,7 @@ import fast.bank.api.domain.card.dto.CardDetailingData;
 import fast.bank.api.domain.card.dto.CardListData;
 import fast.bank.api.domain.card.dto.CardTransactionData;
 import fast.bank.api.domain.card.repository.CardRepository;
-import fast.bank.api.domain.card.service.list.CardListingService;
-import fast.bank.api.domain.card.service.registration.CardRegistrationService;
+import fast.bank.api.domain.card.service.CardService;
 import fast.bank.api.domain.card.service.transaction.CardTransactionService;
 import fast.bank.api.domain.statement.dto.StatementDetailingData;
 import fast.bank.api.domain.statement.repository.StatementRepository;
@@ -42,13 +41,10 @@ public class AccountController {
     private AccountService accountService;
 
     @Autowired
+    private CardService cardService;
+
+    @Autowired
     private StatementService listAccStatementService;
-
-    @Autowired
-    private CardRegistrationService cardRegistrationService;
-
-    @Autowired
-    private CardListingService cardListingService;
 
     @Autowired
     private CardTransactionService cardTransactionService;
@@ -83,7 +79,6 @@ public class AccountController {
     @PutMapping("/activate/{number}")
     @Transactional
     public ResponseEntity activate(@PathVariable Long number) {
-//        var account = activationService.activateAccount(number);
         var account = accountService.activate(number);
         return ResponseEntity.ok(account);
     }
@@ -110,14 +105,14 @@ public class AccountController {
     @PostMapping("/{account}/cards/new")
     @Transactional
     public ResponseEntity newCard(@PathVariable Long account, UriComponentsBuilder uriBuilder) {
-        var card = cardRegistrationService.register(account);
+        var card = cardService.register(account);
         var uri = uriBuilder.path("api/v1/accounts/{account}/cards/{number}").buildAndExpand(card.account(), card.number()).toUri();
         return ResponseEntity.created(uri).body(card);
     }
 
     @GetMapping("/{account}/cards")
     public ResponseEntity<Page<CardListData>> listCards(@PathVariable Long account, @PageableDefault(size = 10, sort = {"id"}) Pageable pagination) {
-        var page = cardListingService.list(account, pagination);
+        var page = cardService.list(account, pagination);
         return ResponseEntity.ok(page);
     }
 
@@ -130,7 +125,7 @@ public class AccountController {
     @PostMapping("/{account}/cards/{number}/transaction")
     @Transactional
     public ResponseEntity cardTransaction(@PathVariable Long account, @PathVariable Long number, @RequestBody @Valid CardTransactionData data) {
-        var transactionData = cardTransactionService.makeTransaction(data, account, number);
+        var transactionData = cardService.makeTransaction(data, account, number);
         return ResponseEntity.ok(transactionData);
     }
 }

@@ -1,4 +1,4 @@
-package fast.bank.api.domain.card.service.registration.validation;
+package fast.bank.api.domain.card.service.validation.registration;
 
 import fast.bank.api.domain.account.repository.AccountRepository;
 import fast.bank.api.domain.card.repository.CardRepository;
