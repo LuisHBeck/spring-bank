@@ -1,7 +1,6 @@
-package fast.bank.api.domain.user.service.activation.validation;
+package fast.bank.api.domain.user.service.validation.activation;
 
 import fast.bank.api.domain.user.model.User;
-import fast.bank.api.domain.user.service.activation.validation.UserActivationValidators;
 import fast.bank.api.infra.exception.validation.ValidException;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package fast.bank.api.domain.user.service.deletion.validation;
+package fast.bank.api.domain.user.service.validation.deletion;
 
 import fast.bank.api.domain.user.repository.UserRepository;
 import fast.bank.api.infra.exception.validation.ValidException;
