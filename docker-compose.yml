@@ -1,0 +1,38 @@
+version: '3.9'
+services:
+  api:
+    depends_on:
+      - postgres-db
+    container_name: spring-bank-api
+    build:
+      context: .
+    ports:
+      - 8056:8056
+    environment:
+      - DATABASE_URL=jdbc:postgresql://postgres-db:5432/spring_bank
+    volumes:
+      - api-volume
+    networks:
+      - spring-bank-net
+
+  postgres-db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: postgres
+      POSTGRES_DB: spring_bank
+    ports:
+      - 5432:5432
+    volumes:
+      - db-volume:/var/lib/postgresql/data/
+    networks:
+      - spring-bank-net
+
+networks:
+  spring-bank-net:
+    driver: bridge
+
+volumes:
+  api-volume:
+
+  db-volume:
